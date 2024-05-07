@@ -14,47 +14,28 @@ let package = Package(
     products: [
         .library(
             name: "MealzIOSFramework",
-            type: .dynamic,
+  //          type: .dynamic,
             targets: ["MealzIOSFramework"]),
     ],
     dependencies: {
-        var dependencies: [Package.Dependency] = []
-        
-        if configurationMode == "dev" {
-            dependencies.append(contentsOf: [
-                .package(path: "../MealzCore")
-            ]
-            )
-        } else {
-            dependencies.append(contentsOf: [
-                .package(url: "https://github.com/Dwalero-org/MealzCoreRelease", from: "1.0.13")
-            ]
-            )
-        }
-        return dependencies
+        [
+            .package(url: "https://github.com/Dwalero-org/MealzCoreRelease", from: "1.0.13")
+        ]
     }(),
     targets: [
-        .target(
+        
+        .target(name: "MealzIOSFramework",
+                dependencies:[
+                    .product(name: "MealzCore", package: "MealzCoreRelease")
+                ]
+               )/*,
+        .binaryTarget(
             name: "MealzIOSFramework",
-            dependencies: {
-                var dependencies: [Target.Dependency] = []
-                if configurationMode == "dev" {
-                    dependencies.append(contentsOf: [
-                        .product(name: "MealzCore", package: "MealzCore"),
-                    ]
-                    )
-                } else {
-                    dependencies.append(contentsOf: [
-                        .product(name: "MealzCore", package: "MealzCoreRelease"),
-                    ]
-                    )
-                }
-                return dependencies
-            }(),
-            resources: [
-                .copy("PrivacyInfo.xcprivacy"),
-                .process("Resources")
-            ]
-        )
+            url: "https://github.com/Dwalero-org/MealzIOSFrameworkRelease/raw/release/1.0.3/MealzIOSFramework.zip",
+            checksum: "364022a7cc50bf6e2c2f7db471f94208afe90fdbf0c24ba9ef5bf332955542bb"
+        )*/
     ]
 )
+/*
+
+ */
