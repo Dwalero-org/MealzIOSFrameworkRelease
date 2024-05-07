@@ -26,17 +26,17 @@ let package = Package(
         return dependencies
     }(),
     targets: [
-        
+        /*
         .target(name: "MealzIOSFramework",
                 dependencies:[
                     .product(name: "MealzCore", package: "MealzCoreRelease")
                 ]
-               )/*,
+               ),*/
         .binaryTarget(
             name: "MealzIOSFramework",
             url: "https://github.com/Dwalero-org/MealzIOSFrameworkRelease/raw/release/1.0.2/MealzIOSFramework.zip",
             checksum: "eb765c59b932778743d81dcdd6286ca13f56b697e6c945a1fc18bd1eac3a01a1"
-        )*/
+        )
     ]
 )
 /*
