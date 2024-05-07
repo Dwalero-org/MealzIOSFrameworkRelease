@@ -6,55 +6,36 @@ import PackageDescription
 let configurationMode = "prod"
 
 let package = Package(
-    name: "MealzIOSFramework",
+    name: "MealziOSSDK",
     defaultLocalization: "fr",
     platforms: [
         .iOS(.v12),
     ],
     products: [
         .library(
-            name: "MealzIOSFramework",
-            type: .dynamic,
-            targets: ["MealzIOSFramework"]),
+            name: "MealziOSSDK",
+//            type: .dynamic,
+            targets: ["MealziOSSDK"]),
     ],
     dependencies: {
-        var dependencies: [Package.Dependency] = []
-        
-        if configurationMode == "dev" {
-            dependencies.append(contentsOf: [
-                .package(path: "../MealzCore")
-            ]
-            )
-        } else {
-            dependencies.append(contentsOf: [
-                .package(url: "https://github.com/Dwalero-org/MealzCoreRelease", from: "1.0.13")
-            ]
-            )
-        }
-        return dependencies
+        [
+            .package(url: "https://github.com/Dwalero-org/MealzCoreRelease", from: "1.0.13")
+        ]
     }(),
     targets: [
-        .target(
+        
+        /*.target(name: "MealziOSSDK",
+                dependencies:[
+                    .product(name: "MealzCore", package: "MealzCoreRelease")
+                ]
+               ),*/
+        .binaryTarget(
             name: "MealzIOSFramework",
-            dependencies: {
-                var dependencies: [Target.Dependency] = []
-                if configurationMode == "dev" {
-                    dependencies.append(contentsOf: [
-                        .product(name: "MealzCore", package: "MealzCore"),
-                    ]
-                    )
-                } else {
-                    dependencies.append(contentsOf: [
-                        .product(name: "MealzCore", package: "MealzCoreRelease"),
-                    ]
-                    )
-                }
-                return dependencies
-            }(),
-            resources: [
-                .copy("PrivacyInfo.xcprivacy"),
-                .process("Resources")
-            ]
+            url: "https://github.com/Dwalero-org/MealzIOSFrameworkRelease/raw/release/1.0.5/MealzIOSFramework.zip",
+            checksum: "8a376f6be576fda05410231e04b2a7a709f3e1ac889e0e778bc98058640065b7"
         )
     ]
 )
+/*
+
+ */
