@@ -19,42 +19,26 @@ let package = Package(
     ],
     dependencies: {
         var dependencies: [Package.Dependency] = []
-        
-        if configurationMode == "dev" {
-            dependencies.append(contentsOf: [
-                .package(path: "../MealzCore")
-            ]
-            )
-        } else {
             dependencies.append(contentsOf: [
                 .package(url: "https://github.com/Dwalero-org/MealzCoreRelease", from: "1.0.13")
             ]
             )
-        }
         return dependencies
     }(),
     targets: [
-        .target(
+        
+        .target(name: "MealzIOSFramework",
+                dependencies:[
+                    .product(name: "MealzCore", package: "MealzCoreRelease")
+                ]
+               )/*,
+        .binaryTarget(
             name: "MealzIOSFramework",
-            dependencies: {
-                var dependencies: [Target.Dependency] = []
-                if configurationMode == "dev" {
-                    dependencies.append(contentsOf: [
-                        .product(name: "MealzCore", package: "MealzCore"),
-                    ]
-                    )
-                } else {
-                    dependencies.append(contentsOf: [
-                        .product(name: "MealzCore", package: "MealzCoreRelease"),
-                    ]
-                    )
-                }
-                return dependencies
-            }(),
-            resources: [
-                .copy("PrivacyInfo.xcprivacy"),
-                .process("Resources")
-            ]
-        )
+            url: "https://github.com/Dwalero-org/MealzIOSFrameworkRelease/raw/release/1.0.2/MealzIOSFramework.zip",
+            checksum: "eb765c59b932778743d81dcdd6286ca13f56b697e6c945a1fc18bd1eac3a01a1"
+        )*/
     ]
 )
+/*
+
+ */
