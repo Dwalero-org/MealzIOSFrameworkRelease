@@ -6,55 +6,40 @@ import PackageDescription
 let configurationMode = "prod"
 
 let package = Package(
-    name: "MealzIOSFramework",
+    name: "MealziOSSDK",
     defaultLocalization: "fr",
     platforms: [
         .iOS(.v12),
     ],
     products: [
         .library(
-            name: "MealzIOSFramework",
-            type: .dynamic,
-            targets: ["MealzIOSFramework"]),
-    ],
-    dependencies: {
-        var dependencies: [Package.Dependency] = []
+            name: "MealziOSSDK",
+            targets: ["MealziOSSDK"]),
+        .library(
+            name: "MealziOSSDKDependency",
+            targets: ["MealziOSSDKDependency"]),
         
-        if configurationMode == "dev" {
-            dependencies.append(contentsOf: [
-                .package(path: "../MealzCore")
-            ]
-            )
-        } else {
-            dependencies.append(contentsOf: [
-                .package(url: "https://github.com/Dwalero-org/MealzCoreRelease", from: "1.0.13")
-            ]
-            )
-        }
-        return dependencies
-    }(),
+    ],
+    dependencies: [
+        .package(url: "https://github.com/Dwalero-org/MealzCoreRelease", from: "1.0.13")
+    ],
     targets: [
         .target(
-            name: "MealzIOSFramework",
-            dependencies: {
-                var dependencies: [Target.Dependency] = []
-                if configurationMode == "dev" {
-                    dependencies.append(contentsOf: [
-                        .product(name: "MealzCore", package: "MealzCore"),
-                    ]
-                    )
-                } else {
-                    dependencies.append(contentsOf: [
-                        .product(name: "MealzCore", package: "MealzCoreRelease"),
-                    ]
-                    )
-                }
-                return dependencies
-            }(),
-            resources: [
-                .copy("PrivacyInfo.xcprivacy"),
-                .process("Resources")
-            ]
+            name: "MealziOSSDKDependency",
+            dependencies: [
+                .target(name: "MealziOSSDK"),
+                .product(name: "MealzCore", package: "MealzCoreRelease")
+            ],
+            path: "./"
+        ),
+        .binaryTarget(
+            name: "MealziOSSDK",
+            url: "https://github.com/Dwalero-org/MealzIOSFrameworkRelease/raw/release/1.0.17/MealziOSSDK.zip",
+            checksum: "ef85cc995830615d24cbefa8f232e55114fc53993d2100beb305d9f112bde3cf"
         )
+        
     ]
 )
+/*
+ 
+ */
