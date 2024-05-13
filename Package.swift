@@ -6,55 +6,28 @@ import PackageDescription
 let configurationMode = "prod"
 
 let package = Package(
-    name: "MealzIOSFramework",
+    name: "MealziOSSDK",
     defaultLocalization: "fr",
     platforms: [
         .iOS(.v12),
     ],
     products: [
         .library(
-            name: "MealzIOSFramework",
-            type: .dynamic,
-            targets: ["MealzIOSFramework"]),
+            name: "MealziOSSDK",
+            targets: ["MealziOSSDK"]),
     ],
-    dependencies: {
-        var dependencies: [Package.Dependency] = []
-        
-        if configurationMode == "dev" {
-            dependencies.append(contentsOf: [
-                .package(path: "../MealzCore")
-            ]
-            )
-        } else {
-            dependencies.append(contentsOf: [
-                .package(url: "https://github.com/Dwalero-org/MealzCoreRelease", from: "1.0.13")
-            ]
-            )
-        }
-        return dependencies
-    }(),
+    dependencies: [
+        .package(url: "https://github.com/Dwalero-org/MealzCoreRelease", from: "1.0.13")
+    ],
     targets: [
-        .target(
-            name: "MealzIOSFramework",
-            dependencies: {
-                var dependencies: [Target.Dependency] = []
-                if configurationMode == "dev" {
-                    dependencies.append(contentsOf: [
-                        .product(name: "MealzCore", package: "MealzCore"),
-                    ]
-                    )
-                } else {
-                    dependencies.append(contentsOf: [
-                        .product(name: "MealzCore", package: "MealzCoreRelease"),
-                    ]
-                    )
-                }
-                return dependencies
-            }(),
-            resources: [
-                .copy("PrivacyInfo.xcprivacy"),
-                .process("Resources")
-            ]
+        .binaryTarget(
+            name: "MealziOSSDK",
+            url: "https://github.com/Dwalero-org/MealzIOSFrameworkRelease/raw/release/2.0.0/MealziOSSDK.zip",
+            checksum: "6d5a42c9cdc4fd67689d9cdf8826cc3fd30b76aa72a75e6f7e9eacf239223cd5"
         )
+        
     ]
 )
+/*
+ 
+ */
